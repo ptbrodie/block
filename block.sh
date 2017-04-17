@@ -15,10 +15,10 @@ function strip_www_read {
 function remove() {
     set -e
     bare=`strip_www $1`
-    sudo touch /etc/tmp_hosts
+    touch /etc/tmp_hosts
     regex="$bare.*$BLOCK_MARKER"
-    sudo grep -v "$regex" /etc/hosts >> /etc/tmp_hosts
-    sudo mv /etc/tmp_hosts /etc/hosts
+    grep -v "$regex" /etc/hosts >> /etc/tmp_hosts
+    mv /etc/tmp_hosts /etc/hosts
 }
 
 function add() {
@@ -31,7 +31,7 @@ function add() {
 }
 
 function list() {
-    sudo grep "$BLOCK_MARKER" /etc/hosts | awk '{print $2}' | strip_www_read | sort | uniq
+    grep "$BLOCK_MARKER" /etc/hosts | awk '{print $2}' | strip_www_read | sort | uniq
 }
 
 function help() {
